@@ -8,8 +8,9 @@ FactoryBot.define do
 
     birthday { [*(18..100)].sample.years.ago }
 
-    document_type { ['passport', 'visa', 'curp'].sample }
+    document_type { ['passport', 'visa'].sample }
     document_number { Faker::Lorem.characters(20) }
-    curp { 'ABCDEFGHIJ12345678' }
+
+    association :address, strategy: :build
   end
 end

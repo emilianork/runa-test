@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Client, type: :model do
 
+  context 'associations' do
+    it { should have_one(:address).validate.required }
+  end
+
   context 'validations' do
     context 'name' do
       it do
