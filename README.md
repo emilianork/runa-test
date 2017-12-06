@@ -1,24 +1,59 @@
-# README
+# Runa test
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Project models documentation
 
-Things you may want to cover:
+https://gitlab.com/jemiliano.cabrera/runa-test/blob/master/docs/models.org
 
-* Ruby version
+## Install steps
 
-* System dependencies
+## Dependencies
 
-* Configuration
+- Ruby 2.4
+- MySQL 5.7
 
-* Database creation
+## Install Docker
 
-* Database initialization
+```https://www.docker.com```
 
-* How to run the test suite
+Install Jet
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+$ brew cask install jet
+```
 
-* Deployment instructions
+## Testing
 
-* ...
+Run
+
+```sh
+$ jet steps
+```
+
+## Development
+
+Run docker container
+
+```sh
+$ docker-compose -f codeship-services.yml up
+```
+
+Enter main service using
+
+```sh
+$ docker-compose -f codeship-services.yml exec ruby /bin/bash
+```
+
+The first time the container is up, run:
+
+```sh
+$ cd /app
+$ bundle install
+$ rake db:setup
+```
+
+Run tests using:
+
+```sh
+$ rspec
+```
+

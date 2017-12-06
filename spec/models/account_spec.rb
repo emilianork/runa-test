@@ -39,16 +39,16 @@ RSpec.describe Account, type: :model do
       end
     end
 
-    context 'maintenance_cost' do
-      it { should validate_presence_of(:maintenance_cost) }
-      it { should validate_numericality_of(:maintenance_cost)
+    context 'monthly_maintenance_cost' do
+      it { should validate_presence_of(:monthly_maintenance_cost) }
+      it { should validate_numericality_of(:monthly_maintenance_cost)
                     .only_integer
                     .is_greater_than_or_equal_to(0) }
 
       it 'should put default value 0' do
         account = FactoryBot.build(:account)
 
-        expect(account.maintenance_cost).to be(0)
+        expect(account.monthly_maintenance_cost).to be(0)
       end
     end
   end

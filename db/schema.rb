@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20171206214419) do
     t.string "account_number", limit: 14, null: false
     t.string "currency", limit: 3, null: false
     t.integer "balance", default: 0, null: false
-    t.integer "maintenance_cost", default: 0, null: false
+    t.integer "monthly_maintenance_cost", default: 0, null: false
     t.datetime "cancellation_date"
     t.bigint "client_id", null: false
     t.datetime "created_at", null: false

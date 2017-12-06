@@ -1,0 +1,44 @@
+* Description
+
+Inside this documention, I will map the the fields expecified from the PDF into the actual
+app.
+
+** Cliente (Client)
+
+| Field PDF                  | Field App          | Type     | Length |
+|----------------------------+--------------------+----------+--------|
+| nombres                    | name               | string   |     50 |
+| apellido paterno           | parental_last_name | string   |     50 |
+| apellido materno           | maternal_last_name | string   |     50 |
+| género                     | gender             | string   |      1 |
+| fecha de nacimiento        | birthday           | date     |        |
+| tipo de documento          | document_type      | string   |     50 |
+| número de documento        | document_number    | string   |     50 |
+| fecha y hora de afiliación | affiliation_date   | datetime |        | 
+
+
+** Cliente (Address) 
+
+It's common in many API to use street1, street2 and street3 instead of specific fields
+simple beacuse the address formats tend to change even in the same country.
+
+| Field PDF    | Field App | Type        | Length |
+|--------------+-----------+-------------+--------|
+| dirección    | street1   | string      |    100 |
+| departamento | street2   | string      |    100 |
+|              | street3   | string      |    100 |
+| provincia    | city      | string      |    100 |
+| distrito     | state     | string      |    100 |
+|              | client_id | foreign_key |        |
+
+**  Cuenta (Account)
+
+| Field PDF                      | Field App               | Type        | Length |
+|--------------------------------+-------------------------+-------------+--------|
+| número de cuenta               | account_number          | string      |     14 |
+| moneda                         | currency                | string      |      3 |
+| saldo actual                   | balance                 | integer     |        |
+| costo de mantenimiento mensual | montly_maintenance_cost | integer     |        |
+| cliente titular                | client_id               | foreign_key |        |
+| fecha de anulación             | cancellation_date       | date        |        |
+

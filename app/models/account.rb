@@ -8,8 +8,8 @@ class Account < ApplicationRecord
   validates :balance, presence: true, numericality: { only_integer: true,
                                                       greater_than_or_equal_to: 0 }
   
-  validates :maintenance_cost, presence: true, numericality: { only_integer: true,
-                                                               greater_than_or_equal_to: 0 }
+  validates :monthly_maintenance_cost, presence: true, numericality: { only_integer: true,
+                                                                       greater_than_or_equal_to: 0 }
 
   after_initialize :set_defaults
 
@@ -28,6 +28,6 @@ class Account < ApplicationRecord
     end
     
     self.balance ||= 0
-    self.maintenance_cost ||= 0
+    self.monthly_maintenance_cost ||= 0
   end
 end
