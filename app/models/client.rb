@@ -1,5 +1,6 @@
 class Client < ApplicationRecord
   has_one :address, validate: true, required: true
+  has_many :accounts, validate: true
 
   NAME_VALIDATIONS = { length: { in: 2..50 },
                        format: { with: /\A[A-Z]'?[-a-zA-Z]+([A-Z]'?[-a-zA-Z]+|\s)*\z/,

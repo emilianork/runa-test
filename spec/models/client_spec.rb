@@ -4,6 +4,7 @@ RSpec.describe Client, type: :model do
 
   context 'associations' do
     it { should have_one(:address).validate.required }
+    it { should have_many(:accounts).validate }
   end
 
   context 'validations' do

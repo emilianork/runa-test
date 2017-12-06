@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206164840) do
+ActiveRecord::Schema.define(version: 20171206214419) do
+
+  create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "account_number", limit: 14, null: false
+    t.string "currency", limit: 3, null: false
+    t.integer "balance", default: 0, null: false
+    t.integer "maintenance_cost", default: 0, null: false
+    t.datetime "cancellation_date"
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_accounts_on_client_id"
+  end
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "street1", limit: 50, null: false
@@ -39,5 +51,6 @@ ActiveRecord::Schema.define(version: 20171206164840) do
     t.index ["document_type", "document_number"], name: "index_clients_on_document_type_and_document_number", unique: true
   end
 
+  add_foreign_key "accounts", "clients"
   add_foreign_key "addresses", "clients"
 end
