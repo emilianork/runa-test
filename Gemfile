@@ -40,7 +40,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.6'
-  gem 'shoulda'
+  gem 'shoulda-matchers', git: 'git://github.com/thoughtbot/shoulda-matchers.git', branch: 'master'
+
   gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
   gem 'factory_bot_rails'
 end
