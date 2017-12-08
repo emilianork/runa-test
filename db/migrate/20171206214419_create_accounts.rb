@@ -5,7 +5,7 @@ class CreateAccounts < ActiveRecord::Migration[5.1]
       t.string   :currency,       limit: 3,  null: false
 
       t.integer  :balance, default: 0, null: false
-      
+
       t.integer  :montly_maintenance_cost, default: 0, null: false
 
       t.datetime :cancellation_date

@@ -4,11 +4,11 @@ FactoryBot.define do
     paternal_last_name  { Faker::Name.last_name }
     maternal_last_name  { Faker::Name.last_name }
 
-    gender { ['F', 'M'].sample }
+    gender { %w[F M].sample }
 
     birthday { [*(18..100)].sample.years.ago }
 
-    document_type { ['passport', 'visa'].sample }
+    document_type { %w[passport visa].sample }
     document_number { Faker::Lorem.characters(20) }
 
     association :address, strategy: :build

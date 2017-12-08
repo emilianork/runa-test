@@ -23,14 +23,16 @@ RSpec.describe Account, type: :model do
       it { should allow_value('USD').for(:currency) }
       it { should allow_value('MXN').for(:currency) }
 
-      it { should_not allow_value("CAD").for(:currency) }
+      it { should_not allow_value('CAD').for(:currency) }
     end
 
     context 'balance' do
       it { should validate_presence_of(:balance) }
-      it { should validate_numericality_of(:balance)
-                    .only_integer
-                    .is_greater_than_or_equal_to(0) }
+      it {
+        should validate_numericality_of(:balance)
+          .only_integer
+          .is_greater_than_or_equal_to(0)
+      }
 
       it 'should put default value 0' do
         account = FactoryBot.build(:account)
@@ -41,9 +43,11 @@ RSpec.describe Account, type: :model do
 
     context 'monthly_maintenance_cost' do
       it { should validate_presence_of(:monthly_maintenance_cost) }
-      it { should validate_numericality_of(:monthly_maintenance_cost)
-                    .only_integer
-                    .is_greater_than_or_equal_to(0) }
+      it {
+        should validate_numericality_of(:monthly_maintenance_cost)
+          .only_integer
+          .is_greater_than_or_equal_to(0)
+      }
 
       it 'should put default value 0' do
         account = FactoryBot.build(:account)

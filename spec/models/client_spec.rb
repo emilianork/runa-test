@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Client, type: :model do
-
   context 'associations' do
     it { should have_one(:address).validate.required }
     it { should have_many(:accounts).validate }
@@ -11,8 +10,8 @@ RSpec.describe Client, type: :model do
     context 'name' do
       it do
         should validate_length_of(:name)
-                 .is_at_least(2)
-                 .is_at_most(50)
+          .is_at_least(2)
+          .is_at_most(50)
       end
 
       it { should validate_presence_of(:name) }
@@ -28,15 +27,15 @@ RSpec.describe Client, type: :model do
     context 'paternal_last_name' do
       it do
         should validate_length_of(:paternal_last_name)
-                 .is_at_least(2)
-                 .is_at_most(50)
+          .is_at_least(2)
+          .is_at_most(50)
       end
 
       it { should validate_presence_of(:paternal_last_name) }
 
       it do
         should allow_value(Faker::Name.last_name).for(:paternal_last_name)
-        
+
         should_not allow_value(Faker::Lorem.characters(51)).for(:paternal_last_name)
         should_not allow_value('--').for(:paternal_last_name)
       end
@@ -45,15 +44,15 @@ RSpec.describe Client, type: :model do
     context 'maternal_last_name' do
       it do
         should validate_length_of(:maternal_last_name)
-                 .is_at_least(2)
-                 .is_at_most(50)
+          .is_at_least(2)
+          .is_at_most(50)
       end
 
       it { should validate_presence_of(:maternal_last_name) }
 
       it do
         should allow_value(Faker::Name.last_name).for(:maternal_last_name)
-        
+
         should_not allow_value(Faker::Lorem.characters(51)).for(:maternal_last_name)
         should_not allow_value('--').for(:maternal_last_name)
       end
@@ -73,7 +72,7 @@ RSpec.describe Client, type: :model do
 
     context 'birthday' do
       it { should validate_presence_of(:birthday) }
-      
+
       it do
         should allow_value(21.years.ago).for(:birthday)
 
@@ -84,13 +83,13 @@ RSpec.describe Client, type: :model do
 
     context 'document_type' do
       it { should validate_presence_of(:document_type) }
-      
+
       it do
         should allow_value('passport').for(:document_type)
         should allow_value('visa').for(:document_type)
         should allow_value('curp').for(:document_type)
 
-        should_not allow_value(Faker::Name.name).for(:document_type)        
+        should_not allow_value(Faker::Name.name).for(:document_type)
       end
 
       it { should validate_uniqueness_of(:document_type).scoped_to(:document_number) }
@@ -101,31 +100,31 @@ RSpec.describe Client, type: :model do
 
       it 'is correct' do
         client.document_type = 'curp'
-        client.document_number = "ABCDEFGHIJ12345678"
+        client.document_number = 'ABCDEFGHIJ12345678'
 
         expect(client.valid?).to be(true)
       end
 
       it 'has more than 18 characters' do
         client.document_type = 'curp'
-        client.document_number = "ABCDEFGHIJK12345678"
+        client.document_number = 'ABCDEFGHIJK12345678'
 
         expect(client.valid?).to be(false)
       end
 
       it 'has less than 18 characters' do
         client.document_type = 'curp'
-        client.document_number = ""
+        client.document_number = ''
 
         expect(client.valid?).to be(false)
       end
 
       it 'has invalid characters' do
         client.document_type = 'curp'
-        client.document_number = "ABCDEFGHIJ1234567-"
+        client.document_number = 'ABCDEFGHIJ1234567-'
 
         expect(client.valid?).to be(false)
-      end 
+      end
     end
   end
 end

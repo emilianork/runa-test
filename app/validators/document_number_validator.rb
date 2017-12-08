@@ -13,11 +13,11 @@ class DocumentNumberValidator < ActiveModel::EachValidator
     record.errors.add(attribute, :invalid)
   end
 
-  def passport_valid?(document_number)
+  def passport_valid?(_document_number)
     true
   end
 
-  def visa_valid?(document_number)
+  def visa_valid?(_document_number)
     true
   end
 
