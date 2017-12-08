@@ -42,3 +42,24 @@ simple beacuse the address formats tend to change even in the same country.
 | cliente titular                | client_id               | foreign_key |        |
 | fecha de anulación             | cancellation_date       | date        |        |
 
+** Tarjeta (Card)
+
+I use the gem ~credit_card_validations~ that not only validates each card number depending
+on the brands, it also generates credit card numbers of an specified brand. Because the 
+requierements as for a credit card that always starts with ~4~ (which is ~VISA~) the app 
+only generates visa cards.
+
+| Field PDF         | Field App      | Type        | Length |
+|-------------------+----------------+-------------+--------|
+| número            | number         | string      |     16 |
+| mes de expiración | exp_month      | string      |      2 |
+| año de expiración | exp_year       | string      |      4 |
+| cvv               | cvv            | string      |      3 |
+| bloqueada         | blocked        | boolean     |        |
+| pin               | pin            | string      |     50 |
+|                   | usd_account_id | foreign_key |        |
+|                   | mxn_account_id | foreign_key |        |
+
+
+As you can see, ~pin~ uses 50 characters due to the fact that its being saved encrypted using
+~Encryptor~. Also one ~Card~ can be associated to maximum two account of different currency.

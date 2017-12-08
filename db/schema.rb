@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_171_206_214_419) do
+ActiveRecord::Schema.define(version: 20_171_208_031_355) do
   create_table 'accounts', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'account_number', limit: 14, null: false
     t.string 'currency', limit: 3, null: false
@@ -35,6 +35,22 @@ ActiveRecord::Schema.define(version: 20_171_206_214_419) do
     t.index ['client_id'], name: 'index_addresses_on_client_id'
   end
 
+  create_table 'cards', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.string 'number', limit: 16, null: false
+    t.string 'exp_month', limit: 2, null: false
+    t.string 'exp_year', limit: 4, null: false
+    t.string 'cvv', limit: 3, null: false
+    t.binary 'pin', limit: 50, null: false
+    t.boolean 'blocked', null: false, defalt: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'usd_account_id'
+    t.bigint 'mxn_account_id'
+    t.index ['mxn_account_id'], name: 'index_cards_on_mxn_account_id'
+    t.index ['usd_account_id'], name: 'index_cards_on_usd_account_id'
+    t.index ['number'], name: 'index_cards_on_number', unique: true
+  end
+
   create_table 'clients', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'name', limit: 50
     t.string 'paternal_last_name', limit: 50
@@ -52,4 +68,6 @@ ActiveRecord::Schema.define(version: 20_171_206_214_419) do
 
   add_foreign_key 'accounts', 'clients'
   add_foreign_key 'addresses', 'clients'
+  add_foreign_key 'cards', 'accounts', column: 'mxn_account_id'
+  add_foreign_key 'cards', 'accounts', column: 'usd_account_id'
 end

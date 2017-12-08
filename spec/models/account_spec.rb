@@ -3,6 +3,17 @@ require 'rails_helper'
 RSpec.describe Account, type: :model do
   context 'associations' do
     it { should belong_to(:client) }
+    it {
+      should have_one(:usd_card)
+        .with_foreign_key('usd_account_id')
+        .class_name('Card')
+    }
+
+    it {
+      should have_one(:mxn_card)
+        .with_foreign_key('mxn_account_id')
+        .class_name('Card')
+    }
   end
 
   context 'validations' do

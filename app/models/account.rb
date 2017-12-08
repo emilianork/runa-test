@@ -1,6 +1,9 @@
 class Account < ApplicationRecord
   belongs_to :client
 
+  has_one :usd_card, foreign_key: 'usd_account_id', class_name: 'Card'
+  has_one :mxn_card, foreign_key: 'mxn_account_id', class_name: 'Card'
+
   validates :account_number, presence: true, length: { is: 14 }
   validates :currency, presence: true, format: { with: /\A(USD|MXN)\z/i,
                                                  message: 'only allows USD or MXN' }
